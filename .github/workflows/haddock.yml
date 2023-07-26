@@ -32,7 +32,7 @@ jobs:
       run: |
         shopt -s globstar && \
         shopt -s extglob && \
-        stack exec haddock -- ./src/**/!(Internal)/*.hs --html --odir docs
+        stack exec haddock -- ./src/**/*.hs $(for m in src/**/!(Internal)/*.hs; do echo -n " --hide $m") --html --odir docs
 
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v2
