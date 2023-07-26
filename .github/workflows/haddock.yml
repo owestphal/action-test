@@ -1,1 +1,25 @@
+name: Haddock
 
+on:
+  push:
+    branches: [ main ]
+
+permission:
+  constents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup stack
+      uses: haskell/actions/setup@v1
+      with:
+        enable-stack: true
+        stack-no-global: true
+
+    - name: Build Haddock
+      run: |
+        stack haddock
