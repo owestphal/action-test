@@ -4,8 +4,8 @@ on:
   push:
     branches: [ main ]
 
-permission:
-  constents: read
+permissions:
+  contents: read
 
 jobs:
   build:
