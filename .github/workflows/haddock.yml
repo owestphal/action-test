@@ -28,6 +28,7 @@ jobs:
         stack-no-global: true
 
     - name: Build Haddock
+      shell: bash
       run: |
         stack exec haddock -- --html --odir docs ./{app,src}/**/*.hs
 
