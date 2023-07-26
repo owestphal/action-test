@@ -53,5 +53,5 @@ jobs:
     - name: Deploy to GitHub Pages
 
       uses: Cecilapp/GitHub-Pages-deploy@v3
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
