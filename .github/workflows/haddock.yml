@@ -30,6 +30,7 @@ jobs:
     - name: Build Haddock
       shell: bash
       run: |
+        shopt -s globstar && \
         stack exec haddock -- --html --odir docs ./{app,src}/**/*.hs
 
     - name: Upload artifact
