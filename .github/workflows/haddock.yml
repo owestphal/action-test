@@ -4,11 +4,11 @@ on:
   push:
     branches: [ main ]
 
-permissions:
-  contents: write
-
 jobs:
   build:
+    permissions:
+      contents: read
+
     runs-on: ubuntu-latest
 
     steps:
@@ -20,7 +20,7 @@ jobs:
       with:
         path: ~/.stack
         key: ubuntu-latest-stack-home-${{ hashFiles('stack.yaml') }}-${{ hashFiles('package.yaml') }}
-        
+
     - name: Setup stack
       uses: haskell/actions/setup@v1
       with:
@@ -31,9 +31,27 @@ jobs:
       run: |
         stack haddock --haddock-arguments "--odir docs"
 
+    - name: Upload artifact
+      uses: action/upload-pages-artifact@v2
+        with:
+          name: github-pages
+          path: docs
+          retention-days: 1
+
+  deploy:
+    needs: build
+
+    permissions:
+      pages: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+    steps:
     - name: Deploy to GitHub Pages
+
       uses: Cecilapp/GitHub-Pages-deploy@v3
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        build_dir: docs
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
