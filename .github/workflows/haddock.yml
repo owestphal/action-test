@@ -32,7 +32,7 @@ jobs:
         stack haddock --haddock-arguments "--odir docs"
 
     - name: Upload artifact
-      uses: action/upload-pages-artifact@v2
+      uses: actions/upload-pages-artifact@v2
       with:
         name: github-pages
         path: docs
