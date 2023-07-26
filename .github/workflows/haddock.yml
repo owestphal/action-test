@@ -33,10 +33,10 @@ jobs:
 
     - name: Upload artifact
       uses: action/upload-pages-artifact@v2
-        with:
-          name: github-pages
-          path: docs
-          retention-days: 1
+      with:
+        name: github-pages
+        path: docs
+        retention-days: 1
 
   deploy:
     needs: build
